@@ -7,16 +7,16 @@
 # a function defined, it will return NOOP.
 #
 python {
-	module = example
+	module = rules
 
 	mod_instantiate = ${.module}
-#	func_instantiate = instantiate
+	func_instantiate = instantiate
 
 	mod_detach = ${.module}
 #	func_detach = instantiate
 
 	mod_authorize = ${.module}
-#	func_authorize = authorize
+	func_authorize = authorize
 
 	mod_authenticate = ${.module}
 #	func_authenticate = authenticate
@@ -25,7 +25,7 @@ python {
 #	func_preacct = preacct
 
 	mod_accounting = ${.module}
-#	func_accounting = accounting
+	func_accounting = accounting
 
 	mod_checksimul = ${.module}
 #	func_checksimul = checksimul

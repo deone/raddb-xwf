@@ -379,6 +379,7 @@ authorize {
 	#
 	#  See "Authorization Queries" in mods-available/sql
 	-sql
+	python
 
 	#
 	#  If you are using /etc/smbpasswd, and are also doing

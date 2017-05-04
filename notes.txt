@@ -11,7 +11,7 @@ Security - /etc/ssh/sshd_config
 
 Server
 ======
-- Set hostname: e.g. `hostnamectl set-hostname production`. This changes the 'localhost' string at the prompt to 'production'.
+- Set hostname: e.g. `hostnamectl set-hostname billing-xwf-test`. This changes the 'localhost' string at the prompt to 'billing-xwf-test'.
 
 Required packages
 =================
@@ -36,8 +36,8 @@ Firewall
 
 SELinux
 =======
-- `chcon -R -t httpd_sys_content_t billing-v1-env/`
-- `chcon -R -h -t httpd_sys_script_exec_t billing-v1-env/lib/python2.7/site-packages/_mysql.so`
+- `chcon -R -t httpd_sys_content_t billing-xwf-env/`
+- `chcon -R -h -t httpd_sys_script_exec_t billing-xwf-env/lib/python2.7/site-packages/_mysql.so`
 - `setsebool -P httpd_can_network_connect_db 1`
 
 Freeradius
@@ -48,3 +48,7 @@ Freeradius
 - Add client credentials. Test.
 - Enable sql and python modules. `cd /etc/raddb/mods-enabled/; ln -s /etc/raddb/mods-available/sql; ln -s /etc/raddb/mods-available/python`
 - Add 'python' to /etc/raddb/sites-available/default under '-sql'
+- Git-clone radius python module. Deploy.
+- Configure python module on Freeradius.
+- pip install billing requirements globally.
+- restart radiusd.
