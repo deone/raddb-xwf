@@ -1,0 +1,50 @@
+Server setup instructions
+=========================
+
+Security - /etc/ssh/sshd_config
+===============================
+1. Create new user deone and always log in with this user. Add `AllowUsers deone` to bottom of file.
+2. Disable root login by changing PermitRootLogin from yes to no.
+3. Restart sshd.
+4. Pair laptop with server so that user 'deone' can log in without typing password.
+5. Change root password.
+
+Server
+======
+- Set hostname: e.g. `hostnamectl set-hostname production`. This changes the 'localhost' string at the prompt to 'production'.
+
+Required packages
+=================
+- Install freeradius freeradius-utils freeradius-client freeradius-mysql freeradius-python mariadb mariadb-server mariadb-devel gcc python-virtualenv redhat-rpm-config git httpd vim mod_wsgi
+- Symlink /bin/vi to /bin/vim
+- Start httpd, mariadb and radiusd services on boot
+Note: On Fedora 25, remove existing vim package with rpm -e --nodeps vim-minimal
+
+
+HTTPD
+=====
+- Deploy Billing.
+- Take away httpd 'Permission Denied' error with `chmod +x /root`.
+
+Firewall
+========
+- Open required ports in firewalld:
+        `firewall-cmd --add-service=http --permanent` 
+        `firewall-cmd --add-service=radius --permanent`
+
+- Reload firewall with `firewall-cmd --reload`.
+
+SELinux
+=======
+- `chcon -R -t httpd_sys_content_t billing-v1-env/`
+- `chcon -R -h -t httpd_sys_script_exec_t billing-v1-env/lib/python2.7/site-packages/_mysql.so`
+- `setsebool -P httpd_can_network_connect_db 1`
+
+Freeradius
+==========
+- Add test user to /etc/raddb/users. `testing Cleartext-Password := "password"`
+- Run server in debug mode. `radiusd -X`
+- Do a test request. Request must return an Access-Accept. `radtest testing password localhost 0 testing123`
+- Add client credentials. Test.
+- Enable sql and python modules. `cd /etc/raddb/mods-enabled/; ln -s /etc/raddb/mods-available/sql; ln -s /etc/raddb/mods-available/python`
+- Add 'python' to /etc/raddb/sites-available/default under '-sql'
