@@ -39,6 +39,8 @@ SELinux
 - `chcon -R -t httpd_sys_content_t billing-xwf-env/`
 - `chcon -R -h -t httpd_sys_script_exec_t billing-xwf-env/lib/python2.7/site-packages/_mysql.so`
 - `setsebool -P httpd_can_network_connect_db 1`
+- `setsebool httpd_tmp_exec on`
+- `setsebool httpd_can_network_connect on`
 
 Freeradius
 ==========
