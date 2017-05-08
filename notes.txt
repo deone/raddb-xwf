@@ -56,4 +56,4 @@ Freeradius
 VMS/Vendor
 ==========
 - Deploy.
-- Run `firewall-cmd --add-port=8008/tcp --permanent` `firewall-cmd --reload` to enable port 8008 for test.
+- Run `firewall-cmd --add-port=8080/tcp --permanent` `firewall-cmd --reload` to enable port 8080 for test.
