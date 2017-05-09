@@ -610,6 +610,7 @@ accounting {
 	#
 	#  See "Accounting queries" in mods-available/sql
 	-sql
+	python
 
 	#
 	#  If you receive stop packets with zero session length,
