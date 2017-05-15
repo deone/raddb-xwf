@@ -59,3 +59,7 @@ VMS/Vendor
 ==========
 - Deploy.
 - Run `firewall-cmd --add-port=8080/tcp --permanent` `firewall-cmd --reload` to enable port 8080 for test.
+
+Tips
+====
+- If you get "RuntimeError.....'reentrant'" in httpd logs after a `dnf upgrade`, dnf remove and install mod_wsgi.
